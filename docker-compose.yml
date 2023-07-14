@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: myapp
+      MYSQL_USER: myapp
+      MYSQL_PASSWORD: password
+  web:
+    build: .
+    ports:
+      - "4000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+volumes:
+  db-data:
+
+
